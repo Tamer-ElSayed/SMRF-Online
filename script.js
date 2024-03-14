@@ -7,7 +7,6 @@
       consoleOutput.innerHTML += message + "<br>"; // Append message to the <p> element
   };
 })();
-console.log("hello world");
 var searchisAlive = false; 
 
 // document.getElementById('txtPrimerSequence').value

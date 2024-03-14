@@ -50,7 +50,6 @@ async function transferToIndexedDB(jsonData) {
 
         // Close the database connection
         transaction.oncomplete = function(event) {
-            console.log('Data transfer completed successfully');
             // Set the variable in local storage to true to indicate that it has been run
             localStorage.setItem('SuccesfullyLoaded', true);
             db.close();
@@ -94,7 +93,6 @@ async function importJSONFromFileToDb() {
 async function main() {
   if (shouldRunFunction()) {
     // Call the function to import JSON data from the file to db
-    console.log("data transfer begin");
     importJSONFromFileToDb();
     
   }
