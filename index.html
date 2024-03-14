@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="Tamer ElSayed Abdelbary" />
+  <link rel="shortcut icon" href="Images/icon possibly.ico" type="image/x-icon">
+  <title>SMRF-Online</title>
+
+  <!-- Custom styles for this site -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="program-container">
+
+
+    <div id="input-section">
+      <div id="Primer-container" class="input-container">
+        <p class="input-label">Enter Primer Sequence</p>
+        <input type="text" id="txtPrimerSequence" class="input-box" placeholder="e.g GACGACATTCCTGCTAATGCCTCACCCGCCGGACCCCTCT">
+      </div>
+      <div id="mismatch-container" class="input-container">
+        <p class="input-label">Enter Mismatch Threshold</p>
+        <input type="number" min="0" id="txtMismatchThr" class="input-box" placeholder="e.g 1: The number of allowed changed bases between the original and new primers">
+      </div>
+      <div id="FirstNum-container" class="input-container">
+        <p class="input-label">Enter First Number in <br> coding sequence</p>
+        <input type="number" min="1" id="txtCodingSeq" class="input-box" placeholder="e.g for GA CGA CAT TCC TGC TAA enter: 3">
+      </div>
+    </div>
+
+    <div id="output-section-container">
+      <div id="loading-bar-container">
+        <div id="loading-bar"></div>
+      </div>
+      <div id="output-section">
+        <p id="consoleOutput"></p>
+      </div>
+    </div>
+    
+
+
+    <div id="author-buttons-section">
+      <p id="author">Created by Tamer Elsayed Abdelbary - German University in Cairo</p>
+      <div id="buttons-container">
+        <button id="">Edit Enzyme List</button>
+        <button id="" onclick="checkThenRun()">
+          <i></i>
+          <span>Run Search</span>
+        </button>
+      </div>
+      
+    </div>
+  </div>
+
+  <script src="database.js"></script>
+  <script src="script.js"></script>
+  
+</body>

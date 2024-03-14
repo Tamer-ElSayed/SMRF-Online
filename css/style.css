@@ -1,0 +1,133 @@
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1.15;
+}
+
+#program-container {
+  width: 80%;
+  border-radius: 10px;
+  background-color: rgb(240, 240, 240);
+  margin: auto;
+  margin-top: 45px;
+  padding: 30px 15px 30px 15px ;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0 10px 0;
+}
+
+.input-label {
+  padding-right: 10px;
+  min-width: 250px;
+}
+
+.input-box {
+  width: 100%;
+  height: 33.6px;
+  padding: 0 10px;
+}
+
+#output-section-container {
+  min-height: 100px;
+  height: 45vh;
+  width: 100%;
+}
+
+#output-section {
+  min-height: 100px;
+  height: 45vh;
+  width: 100%;
+  background-color: white;
+  overflow: auto; /* Enable scrolling when content overflows */
+  white-space: nowrap; /* Preserve line breaks in the content */
+  margin-top: -50px;
+}
+
+#loading-bar-container {
+  z-index: 1;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  transform: translate(-40px, -25px);
+}
+
+#loading-bar {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  border-top-color: #007bff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+#consoleOutput {
+  font-size: 1.1rem;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+#author-buttons-section {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+}
+
+#buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 270px;
+  margin-left: auto;
+}
+
+button {
+  min-width: 120px;
+  height: 38px;
+  margin-left: 10px;
+}
+
+#resSiteTable {
+  display: none;
+}
