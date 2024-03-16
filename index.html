@@ -22,48 +22,97 @@
 </head>
 <body>
   <div id="program-container">
-
-
-    <div id="input-section">
-      <div id="Primer-container" class="input-container">
-        <p class="input-label">Enter Primer Sequence</p>
-        <input type="text" id="txtPrimerSequence" class="input-box" placeholder="e.g GACGACATTCCTGCTAATGCCTCACCCGCCGGACCCCTCT">
-      </div>
-      <div id="mismatch-container" class="input-container">
-        <p class="input-label">Enter Mismatch Threshold</p>
-        <input type="number" min="0" id="txtMismatchThr" class="input-box" placeholder="e.g 1: The number of allowed changed bases between the original and new primers">
-      </div>
-      <div id="FirstNum-container" class="input-container">
-        <p class="input-label">Enter First Number in <br> coding sequence</p>
-        <input type="number" min="1" id="txtCodingSeq" class="input-box" placeholder="e.g for GA CGA CAT TCC TGC TAA enter: 3">
-      </div>
+    <div class="tabs">
+      <button class="tablinks" onclick="openTab(event, 'Program-Tab')" id="default">Program</button>
+      <button class="tablinks" onclick="openTab(event, 'Custom-Enzyme-List-Tab')" id="enzymeListTablink">Custom Enzyme List</button>
     </div>
-
-    <div id="output-section-container">
-      <div id="loading-bar-container">
-        <div id="loading-bar"></div>
+  
+    <div  id="Program-Tab" class="tabcontent">
+      <div id="input-section">
+        <div id="Primer-container" class="input-container">
+          <p class="input-label">Enter Primer Sequence</p>
+          <input type="text" id="txtPrimerSequence" class="input-box" placeholder="e.g GACGACATTCCTGCTAATGCCTCACCCGCCGGACCCCTCT">
+        </div>
+        <div id="mismatch-container" class="input-container">
+          <p class="input-label">Enter Mismatch Threshold</p>
+          <input type="number" min="0" id="txtMismatchThr" class="input-box" placeholder="e.g 1: The number of allowed changed bases between the original and new primers">
+        </div>
+        <div id="FirstNum-container" class="input-container">
+          <p class="input-label">Enter First Number in <br> coding sequence</p>
+          <input type="number" min="1" id="txtCodingSeq" class="input-box" placeholder="e.g for GA CGA CAT TCC TGC TAA enter: 3">
+        </div>
       </div>
-      <div id="output-section">
-        <p id="consoleOutput"></p>
-      </div>
-    </div>
-    
-
-
-    <div id="author-buttons-section">
-      <p id="author">Created by Tamer Elsayed Abdelbary - German University in Cairo</p>
-      <div id="buttons-container">
-        <button id="">Edit Enzyme List</button>
-        <button id="" onclick="checkThenRun()">
-          <i></i>
-          <span>Run Search</span>
-        </button>
+  
+      <div id="output-section-container">
+        <div id="loading-bar-container">
+          <div id="loading-bar"></div>
+        </div>
+        <div id="output-section">
+          <p id="consoleOutput"></p>
+        </div>
       </div>
       
+  
+  
+      <div id="author-buttons-section">
+        <p id="author">Created by Tamer Elsayed Abdelbary - German University in Cairo</p>
+        <div id="buttons-container">
+          <button id="editEnzymeButton" >Edit Enzyme List</button>
+          <button id="" onclick="checkThenRun()">
+            <i></i>
+            <span>Run Search</span>
+          </button>
+        </div>
+      </div>
+
     </div>
+
+
+    <!-- custom enzyme tab -->
+    <div id="Custom-Enzyme-List-Tab" class="tabcontent">
+      <div id="enzymeList-container">
+        <div id="default-selection">
+          <div id="input-section">
+    
+            <div id="search-container" class="input-container">
+              <p class="input-label" id="search-label">Search</p>
+              <input type="text" id="searchInput" class="input-box">
+    
+            </div>
+          </div>
+    
+          <div id="defaultTable-container">
+            <table id="defaultListTable" border="1">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Enzyme name</th>
+                  <th>Restriction<br> site sequence</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          
+        </div>
+        <div id="custom-list"></div>
+      </div>
+    
+      <div id="author-buttons-section">
+        <p id="author">Created by Tamer Elsayed Abdelbary - German University in Cairo</p>
+        <div id="buttons-container">
+        </div>
+      </div>
+    </div>
+
+    
+    
   </div>
+    
 
   <script src="database.js"></script>
   <script src="script.js"></script>
+  <script src="tabsScript.js"></script>
+  <script src="customEnzymeList.js"></script>
   
 </body>
