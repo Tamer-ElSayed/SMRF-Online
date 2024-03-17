@@ -70,22 +70,21 @@
 
     <!-- custom enzyme tab -->
     <div id="Custom-Enzyme-List-Tab" class="tabcontent">
-      <div id="enzymeList-container">
-        <div id="default-selection">
+      <div id="two-columns">
+        <div id="column1">
+
           <div id="input-section">
-    
             <div id="search-container" class="input-container">
               <p class="input-label" id="search-label">Search</p>
               <input type="text" id="searchInput" class="input-box">
-    
             </div>
           </div>
-    
-          <div id="defaultTable-container">
+
+          <div id="defaultTable-Container">  
             <table id="defaultListTable" border="1">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th></th>
                   <th>Enzyme name</th>
                   <th>Restriction<br> site sequence</th>
                 </tr>
@@ -93,15 +92,39 @@
               <tbody></tbody>
             </table>
           </div>
-          
+
+          <div class="controlPanel">
+            <button  onclick="copyThenTransferDb()">
+              <span>Add to Custom List</span>
+              <img src="Images/blue-right-arrow-13828.png">
+            </button>
+          </div>
+
         </div>
-        <div id="custom-list"></div>
+
+        <div id="column2">
+
+          <h2>Custom List</h2>
+
+          <div id="customTable-Container">  
+            <table id="customListTable" border="1">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Enzyme name</th>
+                  <th>Restriction<br> site sequence</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+        </div>
+
       </div>
     
       <div id="author-buttons-section">
         <p id="author">Created by Tamer Elsayed Abdelbary - German University in Cairo</p>
-        <div id="buttons-container">
-        </div>
       </div>
     </div>
 
@@ -116,3 +139,34 @@
   <script src="customEnzymeList.js"></script>
   
 </body>
+
+
+<!--
+<div id="enzymeList-container">
+  <div id="default-selection">
+    <div id="input-section">
+
+      <div id="search-container" class="input-container">
+        <p class="input-label" id="search-label">Search</p>
+        <input type="text" id="searchInput" class="input-box">
+
+      </div>
+    </div>
+
+    <div id="defaultTable-container">
+      <table id="defaultListTable" border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Enzyme name</th>
+            <th>Restriction<br> site sequence</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+  </div>
+  <div id="custom-list"></div>
+</div>
+-->

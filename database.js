@@ -22,6 +22,10 @@ async function openDBandStore() {
         objectStore.createIndex("Enzyme name", ["Enzyme"], { unique: false });
         objectStore.createIndex('Restriction site sequence', "RestrictionSite", { unique: false });
 
+        const objectStore2 = db.createObjectStore("customPackage", { keyPath: 'id', autoIncrement: true });
+        objectStore2.createIndex("Enzyme name", ["Enzyme"], { unique: false });
+        objectStore2.createIndex('Restriction site sequence', "RestrictionSite", { unique: false });
+
       };
       request.onsuccess = function (event) {
           const db = event.target.result;
@@ -95,12 +99,13 @@ async function main() {
     // Call the function to import JSON data from the file to db
     await importJSONFromFileToDb();
   }
-  writeDefaultTable();
+  await writeDefaultTable();
+  await writeCustomTable();
 };
 
 
 main();
-
+customListTable
 
 
 async function writeDefaultTable() {
@@ -121,17 +126,64 @@ async function writeDefaultTable() {
 
         objectStore.openCursor().onsuccess = function (event) {
           const cursor = event.target.result;
+          var checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = 'rowSelect';
           if (cursor) {
             const row = dataTable.insertRow();
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             const cell3 = row.insertCell(2);
-            cell1.textContent = cursor.key;
+            cell1.appendChild(checkbox);
             cell2.textContent = cursor.value.Enzyme;
             cell3.textContent = cursor.value.RestrictionSite;
             cursor.continue();
           }
         };
+        resolve();
+      };
+
+
+    } catch (error) {
+      console.error('Error:', error);
+      reject(error);
+    }
+  });
+}
+
+async function writeCustomTable() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // Open the IndexedDB database
+      const request = indexedDB.open('SMRF-Database', 1);
+
+      request.onerror = function (event) {
+        console.error("Database error: " + event.target.errorCode);
+      };
+
+      request.onsuccess = function (event) {
+        const db = event.target.result;
+        const transaction = db.transaction('customPackage', 'readonly');
+        const objectStore = transaction.objectStore('customPackage');
+        const dataTable = document.getElementById('customListTable').getElementsByTagName('tbody')[0];
+
+        objectStore.openCursor().onsuccess = function (event) {
+          const cursor = event.target.result;
+          var checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = 'rowSelect';
+          if (cursor) {
+            const row = dataTable.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            cell1.appendChild(checkbox);
+            cell2.textContent = cursor.value.Enzyme;
+            cell3.textContent = cursor.value.RestrictionSite;
+            cursor.continue();
+          }
+        };
+        resolve();
       };
 
 
