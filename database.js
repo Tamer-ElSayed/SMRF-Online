@@ -95,7 +95,7 @@ async function main() {
     // Call the function to import JSON data from the file to db
     await importJSONFromFileToDb();
   }
-  writeTable();
+  writeDefaultTable();
 };
 
 
@@ -103,7 +103,7 @@ main();
 
 
 
-async function writeTable() {
+async function writeDefaultTable() {
   return new Promise(async (resolve, reject) => {
     try {
       // Open the IndexedDB database
