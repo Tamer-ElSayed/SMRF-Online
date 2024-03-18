@@ -93,6 +93,12 @@ html {
   font-size: 0.9rem;
 }
 
+#checkbox-section {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 5px;
+}
+
 #output-section-container {
   min-height: 100px;
   height: 45vh;
@@ -183,6 +189,10 @@ html {
   height: 40px;
 }
 
+#cutomListControlPanel {
+  justify-content: flex-start;
+}
+
 .controlPanel >button {
   display: flex;
   align-items: center;
@@ -194,13 +204,35 @@ html {
 
 }
 
+#cutomListControlPanel >button {
+  margin-right: 0;
+}
+
 .controlPanel >button >img {
   height: 40px;
+}
+
+#cutomListControlPanel >button >img {
+  height: 30px;
 }
 
 .controlPanel >button >span {
   padding-right: 5px;
   padding-left: 5px;
+}
+
+#selectButton-right {
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 0 10px !important ;
+}
+
+#selectButton-left {
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 10px 0 0 !important ;
 }
 
 #column2 {
@@ -211,7 +243,7 @@ html {
 #column2 > h2 {
   width: 100%;
   text-align: center;
-  padding: 10px;
+  padding: 13px 10px;
 }
 
 #customTable-Container {
@@ -250,6 +282,6 @@ button {
   margin-left: 10px;
 }
 
-.copied-row {
+.highlighted-row {
   background-color: lightgreen; /* Change background color for copied rows */
 } 

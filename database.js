@@ -92,22 +92,6 @@ async function importJSONFromFileToDb() {
   });
 }
 
-
-// Run the function only if the condition is met
-async function main() {
-  if (shouldRunFunction()) {
-    // Call the function to import JSON data from the file to db
-    await importJSONFromFileToDb();
-  }
-  await writeDefaultTable();
-  await writeCustomTable();
-};
-
-
-main();
-customListTable
-
-
 async function writeDefaultTable() {
   return new Promise(async (resolve, reject) => {
     try {
@@ -140,8 +124,15 @@ async function writeDefaultTable() {
             cursor.continue();
           }
         };
-        resolve();
+
+        transaction.oncomplete = function(event) {
+          db.close();
+          resolve();
+        };
       };
+
+      
+      
 
 
     } catch (error) {
@@ -154,7 +145,6 @@ async function writeDefaultTable() {
 async function writeCustomTable() {
   return new Promise(async (resolve, reject) => {
     try {
-      // Open the IndexedDB database
       const request = indexedDB.open('SMRF-Database', 1);
 
       request.onerror = function (event) {
@@ -183,11 +173,37 @@ async function writeCustomTable() {
             cursor.continue();
           }
         };
-        resolve();
+
+        transaction.oncomplete = function(event) {
+          db.close();
+          resolve();
+        };
+
       };
+      
+      
 
 
     } catch (error) {
+      console.error('Error:', error);
+      reject(error);
+    }
+  });
+}
+
+
+async function mainDatabase() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (shouldRunFunction()) {
+        // Call the function to import JSON data from the file to db
+        await importJSONFromFileToDb();
+      }
+      await writeDefaultTable();
+      await writeCustomTable();
+      resolve();
+    }
+    catch(error) {
       console.error('Error:', error);
       reject(error);
     }

@@ -45,7 +45,7 @@ function copySelectedRows() {
             // If the row doesn't already exist in the target table, clone and append it
             if (!rowExists) {
                 var clonedRow = sourceRow.cloneNode(true);
-                sourceRow.classList.add('copied-row'); // Add class to copied row
+                sourceRow.classList.add('highlighted-row'); // Add class to copied row
                 targetTable.getElementsByTagName('tbody')[0].appendChild(clonedRow);
             }
         }
@@ -58,6 +58,25 @@ function copySelectedRows() {
     checkboxes = targetTable.querySelectorAll('input[type="checkbox"][name="rowSelect"]');
     checkboxes.forEach(function(checkbox) {
         checkbox.checked = false;
+    });
+}
+
+
+function deleteSelectedRows() {
+
+    var targetTable = document.getElementById('customListTable');
+
+    // Get all checkboxes for row selection
+    var checkboxes = targetTable.querySelectorAll('input[type="checkbox"][name="rowSelect"]');
+
+    // Iterate through checkboxes and copy selected rows
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            // Get the corresponding row
+            var targetRow = checkbox.parentNode.parentNode;
+            targetRow.parentNode.removeChild(targetRow);
+
+        }
     });
 }
 
@@ -94,7 +113,7 @@ function transferTableToDatabase() {
             });
 
             transaction.oncomplete = function() {
-                console.log('Data transferred to database successfully.');
+                db.close();
             };
 
             transaction.onerror = function(event) {
@@ -112,7 +131,97 @@ function transferTableToDatabase() {
     };
 }
 
-function copyThenTransferDb() {
+function highlightExistingRows() {
+    // Get reference to both tables
+    let defaultTable = document.getElementById('defaultListTable');
+    let customTable = document.getElementById('customListTable');
+
+    // Get all rows from custom
+    var rowsCustomTable = customTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    // Iterate through each row in default
+    for (var i = 0; i < defaultTable.rows.length; i++) {
+        var rowDefaultTable = defaultTable.rows[i];
+
+        // Iterate through each row in custom to find matches
+        for (var j = 0; j < rowsCustomTable.length; j++) {
+            var rowCustomTable = rowsCustomTable[j];
+
+            // Compare content of each cell in both rows
+            var match = true;
+            for (var k = 0; k < rowDefaultTable.cells.length; k++) {
+                if (rowDefaultTable.cells[k].textContent !== rowCustomTable.cells[k].textContent) {
+                    match = false;
+                    break;
+                }
+            }
+
+            // If all cells match, change background color of the row in default
+            if (match) {
+                rowDefaultTable.classList.add('highlighted-row'); // Add class to copied row
+                break; // Break the loop since we found a match
+            }
+        }
+    }
+}
+
+
+function removeAllHighlights() {
+    // Get reference to both tables
+    let defaultTable = document.getElementById('defaultListTable');
+
+
+    // Iterate through each row in default
+    for (var i = 0; i < defaultTable.rows.length; i++) {
+        var rowDefaultTable = defaultTable.rows[i];
+        rowDefaultTable.classList.remove('highlighted-row'); // Add class to deleted row
+        
+    }
+}
+
+var checkboxesSelected = false;
+
+function toggleCheckboxes(tableId) {
+    var table = document.getElementById(tableId);
+    var checkboxes = table.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = !checkboxesSelected;
+    });
+    checkboxesSelected = !checkboxesSelected;
+}
+
+function checkIfTableIsEmpty() {
+    // Get references to the table and the select all checkbox
+    const table = document.getElementById('customListTable');
+    const Checkbox = document.getElementById('enzymeListCheckbox');
+    const checkboxLabel = document.getElementById('enzymeListCheckboxLabel');
+    // Check if there's only one row (the table head)
+    if (table.rows.length === 1) {
+        Checkbox.checked = false; // Uncheck the checkbox
+        localStorage.setItem('enzymeListCheckboxIsChecked', false);
+        Checkbox.disabled = true; // Disable the checkbox
+        checkboxLabel.style.color = 'gray';
+    } else {
+        Checkbox.disabled = false; // Enable the checkbox
+        checkboxLabel.style.color = 'black';
+    }
+}
+
+function copyThenUpdateDb() {
     copySelectedRows();
     transferTableToDatabase();
+    checkIfTableIsEmpty();
+}
+
+function deleteThenUpdateDb() {
+    deleteSelectedRows();
+    transferTableToDatabase();
+    removeAllHighlights();
+    highlightExistingRows();
+    checkIfTableIsEmpty();
+}
+
+function mainEnzymeLists() {
+    highlightExistingRows();
+    checkIfTableIsEmpty();
 }

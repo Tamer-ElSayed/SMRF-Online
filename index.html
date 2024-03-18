@@ -42,6 +42,13 @@
           <input type="number" min="1" id="txtCodingSeq" class="input-box" placeholder="e.g for GA CGA CAT TCC TGC TAA enter: 3">
         </div>
       </div>
+
+      <div id="checkbox-section">
+        <label id="enzymeListCheckboxLabel">
+          <input type="checkbox" id="enzymeListCheckbox">
+          Use Custom Enzyme List
+        </label>
+      </div>
   
       <div id="output-section-container">
         <div id="loading-bar-container">
@@ -94,8 +101,9 @@
           </div>
 
           <div class="controlPanel">
-            <button  onclick="copyThenTransferDb()">
-              <span>Add to Custom List</span>
+            <button onclick="toggleCheckboxes('defaultListTable')" id="selectButton-left">Select/Deselect All</button>
+            <button  onclick="copyThenUpdateDb()">
+              <span>Add selected to Custom List</span>
               <img src="Images/blue-right-arrow-13828.png">
             </button>
           </div>
@@ -119,6 +127,14 @@
             </table>
           </div>
 
+          <div class="controlPanel" id="cutomListControlPanel">
+            <button  onclick="deleteThenUpdateDb()">
+              <img src="Images/icons8-delete-100.png">
+              <span>Delete selected from custom list</span>
+            </button>
+            <button onclick="toggleCheckboxes('customListTable')" id="selectButton-right">Select/Deselect All</button>
+          </div>
+
         </div>
 
       </div>
@@ -137,6 +153,13 @@
   <script src="script.js"></script>
   <script src="tabsScript.js"></script>
   <script src="customEnzymeList.js"></script>
+
+  <script>
+    (async () => {
+        await mainDatabase();
+        mainEnzymeLists();
+    })();
+  </script>
   
 </body>
 

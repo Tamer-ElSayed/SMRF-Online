@@ -9,9 +9,37 @@
 })();
 var searchisAlive = false; 
 
-// document.getElementById('txtPrimerSequence').value
-// document.getElementById('txtPrimerSequence').value
+const enzymeListCheckbox = document.getElementById('enzymeListCheckbox');
+var checkboxState = localStorage.getItem('enzymeListCheckboxIsChecked');
 
+enzymeListCheckbox.addEventListener('change', function() {
+    // Update local storage with the new checkbox state
+    if (this.checked) {
+        localStorage.setItem('enzymeListCheckboxIsChecked', true);
+    } else {
+        localStorage.setItem('enzymeListCheckboxIsChecked', false);
+    }
+});
+
+
+
+if (checkboxState == null) {
+    localStorage.setItem('enzymeListCheckboxIsChecked', false);
+}
+
+checkboxSetup();
+
+
+
+function checkboxSetup() {
+
+    if (checkboxState == "true") {
+        enzymeListCheckbox.checked = true;
+    }
+    else if (checkboxState == "fasle") {
+        enzymeListCheckbox.checked = false;
+    }
+}
 
 
 
@@ -137,9 +165,17 @@ async function runSearch(threshold, thresholdMin) {
             var misnum = 0; // number of current mismatches
             var arryres;
             var arryprim;
+            whichToRun = localStorage.getItem('enzymeListCheckboxIsChecked');
+            var objectStoreName = 'defaultPackage';
+            if (whichToRun == "true") {
+                objectStoreName = 'customPackage';
+            } 
+            else if (whichToRun == "false") {
+                objectStoreName = 'defaultPackage';
+            }
             const db = await openDB();
-            const transaction = db.transaction(['defaultPackage'], 'readonly');
-            const objectStore = transaction.objectStore('defaultPackage');
+            const transaction = db.transaction([objectStoreName], 'readonly');
+            const objectStore = transaction.objectStore(objectStoreName);
             const cursorRequest = objectStore.openCursor();
     
             cursorRequest.onsuccess = function (event) {
