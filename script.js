@@ -230,7 +230,7 @@ async function runSearch(threshold, thresholdMin) {
                                                 primer.substring(x + row.RestrictionSite.length, primer.length);
                                             let primercodeo = ""; // original amino acid sequence
                                             let primercoden = ""; // new amino acid sequence
-                                            for (let z = 0; z + first + 2 < primer.length; z = z + 3) {
+                                            for (let z = 0; z + first + 2 <= primer.length; z = z + 3) {
                                                 // ^cycles through codon positions
                                                 for (let f = 0; f < codon.length; f++) {
                                                     // ^cycles through codons in array
@@ -239,7 +239,7 @@ async function runSearch(threshold, thresholdMin) {
                                                     }
                                                 }
                                             }
-                                            for (let z2 = 0; z2 + first + 2 < rep.length; z2 = z2 + 3) {
+                                            for (let z2 = 0; z2 + first + 2 <= rep.length; z2 = z2 + 3) {
                                                 for (let f2 = 0; f2 < codon.length; f2++) {
                                                     if (rep.substring(z2 + first - 1, z2 + first + 2).toLowerCase() === codon[f2]) {
                                                         primercoden = primercoden + protein[f2];
@@ -292,7 +292,7 @@ async function runSearch(threshold, thresholdMin) {
                                     primer.substring(x + row.RestrictionSite.length, primer.length);
                                 let primercodeo = ""; // original amino acid sequence
                                 let primercoden = ""; // new amino acid sequence
-                                for (let z = 0; z + first + 2 < primer.length; z = z + 3) {
+                                for (let z = 0; z + first + 2 <= primer.length; z = z + 3) {
                                     // ^cycles through codon positions
                                     for (let f = 0; f < codon.length; f++) {
                                         // ^cycles through codons in array
@@ -301,7 +301,7 @@ async function runSearch(threshold, thresholdMin) {
                                         }
                                     }
                                 }
-                                for (let z2 = 0; z2 + first + 2 < rep.length; z2 = z2 + 3) {
+                                for (let z2 = 0; z2 + first + 2 <= rep.length; z2 = z2 + 3) {
                                     for (let f2 = 0; f2 < codon.length; f2++) {
                                         if (rep.substring(z2 + first - 1, z2 + first + 2).toLowerCase() === codon[f2]) {
                                             primercoden = primercoden + protein[f2];
@@ -314,6 +314,8 @@ async function runSearch(threshold, thresholdMin) {
                                         " restriction site (" + row.Enzyme + ")");
                                     console.log("New primer :");
                                     console.log(rep2);
+                                    console.log(primercodeo);
+                                    console.log(primercoden);
                                     console.log("--------------------------------------------------------------------------------");
                                 }
                             }
