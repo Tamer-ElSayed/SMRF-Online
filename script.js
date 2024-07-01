@@ -314,8 +314,8 @@ async function runSearch(threshold, thresholdMin) {
                                         " restriction site (" + row.Enzyme + ")");
                                     console.log("New primer :");
                                     console.log(rep2);
-                                    console.log(primercodeo);
-                                    console.log(primercoden);
+                                    //console.log(primercodeo);
+                                    //console.log(primercoden);
                                     console.log("--------------------------------------------------------------------------------");
                                 }
                             }
