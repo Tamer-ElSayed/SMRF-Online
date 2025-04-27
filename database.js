@@ -195,6 +195,10 @@ async function writeCustomTable() {
 async function mainDatabase() {
   return new Promise(async (resolve, reject) => {
     try {
+
+      const db = await openDBandStore(); // Always ensure database and stores exist first
+      db.close();
+
       if (shouldRunFunction()) {
         // Call the function to import JSON data from the file to db
         await importJSONFromFileToDb();
